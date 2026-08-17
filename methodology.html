@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How this was built — Left behind</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="house.css">
+<style>
+:root{--ink3:#6b5b9a}
+.doc{max-width:780px;padding:0 26px 70px}
+.doc h2{font-family:var(--display);font-size:1.1rem;font-weight:700;letter-spacing:-.01em;
+  margin:30px 0 9px;padding-bottom:6px;border-bottom:1px solid var(--hair)}
+.doc p{margin:0 0 13px;line-height:1.62}
+.doc ul{margin:0 0 13px;padding-left:20px}.doc li{margin-bottom:7px;line-height:1.55}
+code{font-family:ui-monospace,Menlo,monospace;font-size:.85em;background:var(--paper2);padding:1px 5px}
+.back{font-size:var(--t-small);letter-spacing:.13em;text-transform:uppercase;font-weight:700;
+  color:var(--ink2);text-decoration:none}
+table.h td:first-child{font-weight:600}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="strip"><a class="back" href="index.html">&larr; Back to the data</a><span>Method</span></div>
+  <div class="head">
+    <h1>How this was built</h1>
+    <p class="sub">The source, the translation, the year system, and the large hole in the middle
+      of this subject.</p>
+  </div>
+  <div class="doc">
+
+    <h2>The source</h2>
+    <p>All figures come from one page: the Tokyo Metropolitan Police Department's annual lost-property
+      statistics,
+      <a href="https://www.keishicho.metro.tokyo.lg.jp/about_mpd/jokyo_tokei/kakushu/kaikei.html" target="_blank" rel="noopener">遺失物取扱状況</a>,
+      last updated March 2, 2026. The tables there are HTML, not a data file, so the build script parses
+      them directly and fails loudly if the expected tables are not present.</p>
+    <p>The prefecture directory comes from the National Police Agency's index of
+      <a href="https://www.npa.go.jp/bureau/soumu/ishitsubutsu/otoshimono/todofukenishitubutu.html" target="_blank" rel="noopener">prefectural lost-property searches</a>.
+      All 47 are listed; 43 of them point at one shared national database and four run their own site.</p>
+
+    <h2>The year</h2>
+    <p>Japanese government statistics use imperial era years. This data covers <strong>令和7年,
+      Reiwa 7, which is the calendar year 2025</strong>. The comparison column throughout is 令和6年,
+      Reiwa 6, or 2024. Reiwa 1 was 2019.</p>
+
+    <h2>Translation</h2>
+    <p>Category and disposition names were translated by hand rather than machine, and the Japanese
+      original is shown on the site next to every category so the mapping can be checked. The full
+      table:</p>
+    <table class="h">
+      <tr><th>Japanese</th><th>Used here</th></tr>
+      <tr><td>証明書類</td><td>Certificates and documents</td></tr>
+      <tr><td>有価証券類</td><td>Securities and vouchers</td></tr>
+      <tr><td>衣類履物類</td><td>Clothing and footwear</td></tr>
+      <tr><td>電気製品類</td><td>Electrical goods</td></tr>
+      <tr><td>財布類</td><td>Wallets and purses</td></tr>
+      <tr><td>かさ類</td><td>Umbrellas</td></tr>
+      <tr><td>かばん類</td><td>Bags</td></tr>
+      <tr><td>携帯電話類</td><td>Mobile phones</td></tr>
+      <tr><td>貴金属類</td><td>Jewellery and precious metals</td></tr>
+      <tr><td>カメラ眼鏡類</td><td>Cameras and eyeglasses</td></tr>
+      <tr><td>遺失者返還</td><td>Returned to the owner</td></tr>
+      <tr><td>拾得者引渡</td><td>Given to the finder</td></tr>
+      <tr><td>都帰属</td><td>Became property of Tokyo</td></tr>
+      <tr><td>廃棄・任意提出</td><td>Discarded or surrendered</td></tr>
+    </table>
+
+    <h2>Two different counts that must not be added together</h2>
+    <p>The police publish two separate series and this site keeps them apart:</p>
+    <ul>
+      <li><strong>拾得</strong>, things found and handed in. 4,538,244 reports covering 4,850,775 items
+        and &yen;4,508,824,075 in cash.</li>
+      <li><strong>遺失</strong>, things people came to report losing. 1,100,657 reports covering
+        2,291,811 items and &yen;8,325,160,470 in cash.</li>
+    </ul>
+    <p>These are counts of different events and there is no key joining them. The "found versus
+      reported lost" view puts them side by side to show an asymmetry; it is not a matching rate, and
+      you cannot subtract one from the other to get a number of unreturned items. More cash is
+      <em>reported lost</em> than is <em>handed in</em>, which is what you would expect and is not
+      evidence of anything.</p>
+
+    <h2>Why the return rates are trustworthy and the totals are trickier</h2>
+    <p>The disposition table is internally consistent: for each category, the four outcomes sum to that
+      category's total. Return rates are computed straight from it. But that table's grand total,
+      4,750,389 items, differs slightly from the headline item count of 4,850,775, because the
+      disposition table covers items <em>processed</em> in the year and the headline covers items
+      <em>received</em>. Items received in late December are processed the following year. Do not mix
+      the two.</p>
+
+    <h2>What is missing, and it is a lot</h2>
+    <ul>
+      <li><strong>The other 46 prefectures.</strong> Only Tokyo publishes this depth in a form that can
+        be parsed. The prefecture tab links to each official search, but there is no national
+        item-level dataset behind it.</li>
+      <li><strong>Item-level records.</strong> The searchable police databases are session-based
+        Japanese-language forms with no bulk export and no API. Nothing here is item-level; it is all
+        category totals.</li>
+      <li><strong>History.</strong> This is one year against the prior year. The police page does not
+        publish a long machine-readable series.</li>
+      <li><strong>Anything found and kept.</strong> By definition this counts only what someone handed
+        to the police.</li>
+    </ul>
+
+    <h2>Rebuilding it</h2>
+    <p><code>build_japan.py</code> in this repository fetches both pages and writes
+      <code>data/data.json</code>. It exits non-zero if the Tokyo page's table structure changes. The
+      police update the page once a year, in early March.</p>
+
+    <p class="caution" style="margin-top:26px">Built with AI assistance. Figures are parsed from the
+      police tables rather than retyped, but the source page is the authority.</p>
+    <p><a class="back" href="index.html">&larr; Back to the data</a></p>
+  </div>
+</div>
+</body>
+</html>
