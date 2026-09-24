@@ -7,108 +7,92 @@
 <meta name="description" content="4.5 million lost items handed in to Tokyo police in a year, and what happened to each kind. Phones come home. Umbrellas never do.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="house.css">
 <style>
-:root{--ink3:#6b5b9a}
+:root{--accent:var(--mint)}
 .pane{display:none}.pane.on{display:block}
-.wide{padding:20px 26px 30px;max-width:1000px}
-.lead{font-size:1.02rem;line-height:1.55;color:#39403a;max-width:66ch;margin:0 0 20px}
-/* the return ladder — the signature view */
+.head{padding-bottom:0}
+.wide{padding:20px clamp(16px,4vw,48px) 30px;max-width:1000px}
+.lead{font-size:15px;line-height:1.55;color:var(--fg2);max-width:66ch;margin:0 0 18px}
+.fig .aside{margin-bottom:12px}
+.fig .keys{margin:0 0 18px}
+/* the return ladder */
+#ladder{max-width:1000px}
 .lad{margin-bottom:16px}
 .lad .top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:5px}
-.lad .nm{font-family:var(--display);font-weight:600;font-size:1.06rem}
-.lad .nm em{font-style:normal;font-weight:400;color:var(--ink2);font-size:.86rem;margin-left:8px}
-.lad .pct{font-family:var(--display);font-weight:700;font-size:1.3rem;font-variant-numeric:tabular-nums}
-.bar{display:flex;height:26px;width:100%;overflow:hidden}
-.bar i{display:block;height:100%}
-.s0{background:var(--ink1)}          /* returned to owner */
-.s1{background:var(--ink2c);opacity:.75}  /* given to finder */
-.s2{background:var(--ink3);opacity:.7}    /* became Tokyo's */
-.s3{background:var(--hair)}               /* discarded */
-.lad .foot2{font-size:var(--t-micro);letter-spacing:.09em;text-transform:uppercase;font-weight:700;
-  color:var(--ink2);margin-top:4px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.key{display:flex;gap:16px;flex-wrap:wrap;font-size:var(--t-micro);letter-spacing:.1em;
-  text-transform:uppercase;font-weight:700;color:var(--ink2);margin:0 0 22px}
-.key span{display:flex;align-items:center;gap:6px}
-.key i{width:11px;height:11px;display:block}
-.gap{display:grid;grid-template-columns:190px 1fr 1fr;gap:8px;align-items:center;padding:7px 0;
-  border-bottom:1px solid var(--hair2)}
+.lad .nm{font-family:var(--display);font-variation-settings:'wdth' 88;font-weight:600;font-size:var(--t-rec)}
+.lad .nm em{font-style:normal;font-family:var(--sans);font-weight:400;color:var(--fg2);font-size:var(--t-small);margin-left:8px}
+.lad .pct{font-family:var(--display);font-variation-settings:'wdth' 88;font-weight:700;font-size:1.2rem;font-variant-numeric:tabular-nums;color:var(--mint)}
+.bar{display:flex;height:26px;width:100%;overflow:hidden;background:var(--bg2)}
+.bar i{display:block;height:100%;cursor:default}
+.bar i:hover{outline:2px solid var(--fg);outline-offset:-2px}
+.s0{background:var(--mint)}       /* returned to owner */
+.s1{background:var(--sun)}        /* given to finder */
+.s2{background:var(--lilac)}      /* became Tokyo's */
+.s3{background:var(--fg2);opacity:.55} /* discarded */
+.lad .foot2{font-size:var(--t-micro);color:var(--fg2);margin-top:4px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.gap{display:grid;grid-template-columns:190px 1fr 1fr;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid var(--line2)}
 .gap .lab{font-weight:600;font-size:.95rem}
 .gap .side{display:flex;align-items:center;gap:8px}
 .gap .side.l{justify-content:flex-end}
-.gap i{height:14px;display:block;mix-blend-mode:multiply}
-.gap .fnd{background:var(--ink2c);opacity:.8}
-.gap .lst{background:var(--ink1);opacity:.8}
-.gap u{text-decoration:none;font-family:var(--display);font-weight:600;font-size:.86rem;
-  font-variant-numeric:tabular-nums;color:var(--ink2);white-space:nowrap}
+.gap i{height:14px;display:block}
+.gap .fnd{background:var(--cobalt)}
+.gap .lst{background:var(--orange)}
+.gap u{text-decoration:none;font-family:var(--display);font-weight:600;font-size:.9rem;font-variant-numeric:tabular-nums;color:var(--fg2);white-space:nowrap}
 @media(max-width:700px){.gap{grid-template-columns:1fr}.gap .side.l{justify-content:flex-start}}
-.prefs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0}
-.prefs a{display:block;padding:10px 14px;border-right:1px solid var(--hair);
-  border-bottom:1px solid var(--hair);text-decoration:none;color:var(--ink);font-weight:600;font-size:.95rem}
-.prefs a:hover{background:var(--paper2)}
-.prefs a em{display:block;font-style:normal;font-size:var(--t-micro);letter-spacing:.09em;
-  text-transform:uppercase;font-weight:700;color:var(--ink2);margin-top:2px}
+.prefs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:0;border-top:1px solid var(--line2)}
+.prefs a{display:block;padding:10px 14px;border-right:1px solid var(--line2);border-bottom:1px solid var(--line2);text-decoration:none;color:var(--fg);font-weight:600;font-size:.95rem}
+.prefs a:hover{background:var(--bg2)}
+.prefs a em{display:block;font-style:normal;font-size:var(--t-micro);font-weight:500;color:var(--fg2);margin-top:2px}
 </style>
 </head>
 <body>
 <div class="sheet">
 
   <div class="strip">
-    <span>Tokyo Metropolitan Police Department &middot; National Police Agency</span>
-    <span id="range">Lost property</span>
+    <span>Tokyo Metropolitan Police Department lost-property statistics</span>
+    <span id="range">Calendar year 2025</span>
   </div>
 
   <div class="head">
-    <!-- mark: umbrellas, the thing nobody comes back for -->
-    <div class="hmark" aria-hidden="true">
-      <img src="img/mark.png" alt="Abstract screenprint of overlapping umbrellas, one of them closed and leaning" width="640" height="357">
-    </div>
     <h1>Left behind</h1>
-    <p class="sub">In one year Tokyo police took in <b id="k-items">&mdash;</b> lost items and
-      <b id="k-cash">&mdash;</b> in cash &mdash; about <b id="k-cashusd">&mdash;</b>. What happens next
-      depends almost entirely on what the thing is. <b id="k-phone">&mdash;</b> of mobile phones go back
-      to their owner. Of <b id="k-umb">&mdash;</b> umbrellas, <b id="k-umbpct">&mdash;</b> do.</p>
+    <p class="finding" id="finding">In 2025 Tokyo police took in 4,850,775 lost items, and 83 percent of the mobile phones went back to their owners, against 1.7 percent of the umbrellas.</p>
+    <p class="lede" id="lede"></p>
     <p class="src">Source: <a href="https://www.keishicho.metro.tokyo.lg.jp/about_mpd/jokyo_tokei/kakushu/kaikei.html" target="_blank" rel="noopener">Tokyo Metropolitan Police lost-property statistics</a>
-      &middot; <a href="methodology.html">method</a></p>
+      &middot; <a href="methodology.html">How this was built</a></p>
   </div>
 
-  <div class="capline" id="capline"></div>
-  <div class="counts" id="counts"></div>
+  <div class="fig">
+    <div class="figcap"><span><b>Each bar is one kind of item, split by what happened to everything of that kind the police processed.</b></span><span id="c-fate"></span></div>
+    <p class="aside">Under Japan's Lost Property Act an unclaimed item belongs to whoever handed it in,
+      if they claim it within two months. Anything nobody wants becomes the property of the
+      Metropolitan Government. Sorted by the share that found its owner again.</p>
+    <div class="keys">
+      <span class="key"><i class="s0"></i>Returned to the owner</span>
+      <span class="key"><i class="s1"></i>Given to the finder</span>
+      <span class="key"><i class="s2"></i>Became property of Tokyo</span>
+      <span class="key"><i class="s3"></i>Discarded or surrendered</span>
+    </div>
+    <div id="ladder"></div>
+    <div class="readout" id="ro-fate"></div>
+  </div>
 
   <div class="tabs" id="tabs">
-    <button class="on" data-p="fate">What happens to it</button>
-    <button data-p="gap">Found vs missed</button>
+    <button class="on" data-p="gap">Found vs. missed</button>
     <button data-p="search">Search for yours</button>
   </div>
 
-  <!-- ============ fate ============ -->
-  <div class="pane on" id="p-fate">
-    <div class="colhead"><span>Every item Tokyo police processed, by what became of it</span><span id="c-fate"></span></div>
-    <div class="wide">
-      <p class="lead">Under Japan's Lost Property Act an unclaimed item belongs to whoever handed it in,
-        if they claim it within two months. Anything nobody wants becomes the property of the
-        Metropolitan Government. Sorted by the share that found its owner again.</p>
-      <div class="key">
-        <span><i class="s0"></i>Returned to the owner</span>
-        <span><i class="s1"></i>Given to the finder</span>
-        <span><i class="s2"></i>Became property of Tokyo</span>
-        <span><i class="s3"></i>Discarded or surrendered</span>
-      </div>
-      <div id="ladder"></div>
-    </div>
-  </div>
-
   <!-- ============ gap ============ -->
-  <div class="pane" id="p-gap">
+  <div class="pane on" id="p-gap">
     <div class="colhead"><span>Items handed in, against items anyone reported missing</span><span id="c-gap"></span></div>
     <div class="wide">
       <p class="lead">Two separate counts: things people found and turned in, and things people came
         to the police to report losing. Where the left bar dwarfs the right, nobody bothered to look.
         Where the right dwarfs the left, people are searching for things that never arrived.</p>
-      <div class="key">
-        <span><i class="fnd" style="background:#4a6b52;opacity:.8"></i>Handed in</span>
-        <span><i class="lst" style="background:#2f4d8a;opacity:.8"></i>Reported lost</span>
+      <div style="margin:0 0 18px">
+        <span class="key"><i style="background:var(--cobalt)"></i>Handed in</span>
+        <span class="key"><i style="background:var(--orange)"></i>Reported lost</span>
       </div>
       <div id="gapchart"></div>
     </div>
@@ -130,8 +114,8 @@
   <div class="foot">
     <p class="caution">Built with AI assistance. Japanese category names were translated by hand and
       the originals are shown throughout. Figures cover Tokyo only, for the year the Metropolitan
-      Police call Reiwa 7.</p>
-    <p id="fxnote" style="font-size:.88rem;margin-bottom:10px"></p>
+      Police call Reiwa 7 (2025).</p>
+    <p id="fxnote" style="font-size:var(--t-small);margin-bottom:10px"></p>
     <p><a href="methodology.html">How this was built, and what it leaves out &rarr;</a></p>
   </div>
 </div>
@@ -142,6 +126,10 @@ const esc=s=>(s==null?'':String(s)).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt
 const nf=n=>Number(n).toLocaleString('en-US');
 const yen=n=>'¥'+Number(n).toLocaleString('en-US');
 let D;
+const APMON=['Jan.','Feb.','March','April','May','June','July','Aug.','Sept.','Oct.','Nov.','Dec.'];
+function apDate(iso){const [y,m,d]=iso.split('-').map(Number);return APMON[m-1]+' '+d+', '+y}
+function yenWords(n){return n>=1e9?'¥'+(n/1e9).toFixed(1)+' billion':n>=1e6?'¥'+(n/1e6).toFixed(1)+' million':yen(n)}
+function usdWords(n){const v=n/D.fx.jpy_per_usd;return v>=1e9?'$'+(v/1e9).toFixed(1)+' billion':v>=1e6?'$'+(v/1e6).toFixed(1)+' million':'$'+Math.round(v).toLocaleString('en-US')}
 function usd(n){
   const v=n/D.fx.jpy_per_usd;
   if(v>=1e9) return '$'+(v/1e9).toFixed(1)+'bn';
@@ -157,29 +145,22 @@ const ORDER=['Returned to the owner','Given to the finder','Became property of T
 
 function init(){
   const M=D.meta;
-  $('#range').textContent=M.year_ja+' ('+M.year+')';
+  $('#range').textContent='Calendar year '+M.year+' ('+M.year_ja+')';
   const items=D.found['物品点数'].y2025, cash=D.found['現金'].y2025, reports=D.found['拾得件数'].y2025;
   const umb=D.outcomes.find(o=>o.en==='Umbrellas');
   const ph=D.outcomes.find(o=>o.en==='Mobile phones');
-  $('#k-items').textContent=nf(items);
-  $('#k-cash').textContent=yen(cash);
-  $('#k-cashusd').textContent=usd(cash);
-  $('#k-phone').textContent=ph.return_rate+'%';
-  $('#k-umb').textContent=nf(umb.total);
-  $('#k-umbpct').textContent=umb.return_rate+'%';
-
   const lostCash=D.lost['現金'].y2025;
-  $('#capline').innerHTML='Tokyo, calendar year <b>'+M.year+'</b> ('+M.year_ja+'), compared with '+M.prior_year+' &middot; published by the Metropolitan Police '+M.page_updated;
-  $('#counts').innerHTML=[
-    [nf(reports),'Found reports'],
-    [nf(items),'Items'],
-    [usd(cash),'Cash found'],
-    [usd(lostCash),'Cash reported lost'],
-    [umb.return_rate+'%','Umbrellas home'],
-  ].map(([b,s])=>`<div><b>${b}</b><span>${s}</span></div>`).join('');
+  $('#finding').textContent='In '+M.year+' Tokyo police took in '+nf(items)+' lost items, and '+ph.return_rate+
+    ' percent of the mobile phones went back to their owners, against '+umb.return_rate+' percent of the umbrellas.';
+  $('#lede').innerHTML='The items arrived in <b>'+nf(reports)+'</b> found-property reports, along with <b>'+yenWords(cash)+
+    '</b> in cash, about <b>'+usdWords(cash)+'</b>. People also told the police they had lost <b>'+yenWords(lostCash)+
+    '</b> in cash, about '+usdWords(lostCash)+'; that is a separate count and cannot be netted against the first. '+
+    'What happens to a found item depends almost entirely on what it is. Of <b>'+nf(umb.total)+'</b> umbrellas, <b>'+
+    nf(umb.disposition['Returned to the owner'])+'</b> went home. Figures are for Tokyo only, published by the Metropolitan Police on '+
+    apDate(M.page_updated)+'.';
 
   $('#fxnote').innerHTML='Yen converted at &yen;'+D.fx.jpy_per_usd+' to the dollar, the '+
-    esc(D.fx.basis)+' ('+D.fx.observations+' observations, &yen;'+D.fx.min+'&ndash;'+D.fx.max+
+    esc(D.fx.basis.replace('ECB','European Central Bank'))+' ('+D.fx.observations+' observations, &yen;'+D.fx.min+'&ndash;'+D.fx.max+
     '). Source: '+esc(D.fx.source)+'. Yen figures are the published ones; dollars are derived.';
 
   document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{
@@ -192,12 +173,12 @@ function init(){
 
 function renderLadder(){
   const rows=[...D.outcomes].sort((a,b)=>(b.return_rate||0)-(a.return_rate||0));
-  $('#c-fate').textContent=nf(rows.reduce((t,r)=>t+(r.total||0),0))+' items';
+  $('#c-fate').textContent=nf(rows.reduce((t,r)=>t+(r.total||0),0))+' items in these '+rows.length+' categories';
   $('#ladder').innerHTML=rows.map(r=>{
     const t=r.total||1;
     const segs=ORDER.map((k,i)=>{
       const v=r.disposition[k]||0;
-      return v? `<i class="s${i}" style="width:${(v/t*100).toFixed(2)}%" title="${esc(k)}: ${nf(v)}"></i>`:'';
+      return v? `<i class="s${i}" style="width:${(v/t*100).toFixed(2)}%" data-cat="${esc(r.en)}" data-k="${esc(k)}" data-v="${v}" data-t="${r.total}"></i>`:'';
     }).join('');
     const ret=r.disposition['Returned to the owner']||0;
     return `<div class="lad">
@@ -207,6 +188,12 @@ function renderLadder(){
       <div class="foot2"><span>${nf(ret)} of ${nf(r.total)} went home</span>
         <span>${nf((r.disposition['Given to the finder']||0))} kept by whoever found it</span></div></div>`;
   }).join('');
+  const ro=$('#ro-fate'),def='Hover over or tap a bar segment for its count.';ro.textContent=def;
+  const show=el=>{if(!el||!el.dataset.k){ro.textContent=def;return}
+    const v=+el.dataset.v,t=+el.dataset.t;
+    ro.innerHTML=`${esc(el.dataset.cat)}: <b>${nf(v)}</b> of ${nf(t)} (${(v/t*100).toFixed(1)} percent) ${esc(el.dataset.k.charAt(0).toLowerCase()+el.dataset.k.slice(1)).replace('became property of tokyo','became property of Tokyo')}.`};
+  $('#ladder').addEventListener('pointerover',e=>show(e.target.closest('.bar i')));
+  $('#ladder').addEventListener('pointerleave',()=>{ro.textContent=def});
 }
 
 function renderGap(){
